@@ -1,22 +1,23 @@
 import 'reflect-metadata';
 import Koa from 'koa';
 import Router from '@koa/router';
+import path from 'path';
 import cors from '@koa/cors';
 import nextApp from 'next';
 import loggerMain from 'tracer';
-import { ApolloServer, gql } from 'apollo-server-koa';
+import { ApolloServer } from 'apollo-server-koa';
+import { buildSchema } from 'type-graphql';
+
+import { GraphQLSchema } from 'graphql';
+import {
+  UserCrudResolver,
+  UserRelationsResolver,
+  AccountRelationsResolver,
+  AccountCrudResolver,
+} from '../generated/type-graphql';
+import prisma, { Context } from './utils/prisma';
 
 export const logger = loggerMain.colorConsole();
-
-const Query = gql`
-  type Query {
-    _empty: String
-  }
-
-  schema {
-    query: Query
-  }
-`;
 
 export default class Server {
   server: Koa;
@@ -32,11 +33,34 @@ export default class Server {
     this.server.use(cors());
   }
 
+  async setupORM(): Promise<GraphQLSchema> {
+    // Connect prisma client
+    await prisma.$connect();
+
+    // Prepare schema
+    const schema = await buildSchema({
+      resolvers: [
+        UserCrudResolver,
+        UserRelationsResolver,
+        AccountRelationsResolver,
+        AccountCrudResolver,
+      ],
+      emitSchemaFile: path.resolve(
+        __dirname,
+        '../generated/generated-schema.graphql',
+      ),
+      validate: false,
+    });
+    return schema;
+  }
+
   async setupGraphQl(): Promise<void> {
     try {
+      const schema = await this.setupORM();
       const apolloServer = new ApolloServer({
-        typeDefs: [Query],
+        schema,
         playground: process.env.NODE_ENV !== 'production',
+        context: (): Context => ({ prisma }),
       });
 
       apolloServer.applyMiddleware({

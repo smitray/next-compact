@@ -1,0 +1,46 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator typegraphql {
+  provider = "typegraphql-prisma"
+  output = "../generated/type-graphql"
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum Status {
+  VERIFIED
+  UNVERIFIED
+  CREATED
+}
+
+model Account {
+  id String @id @default(uuid())
+  username String
+  email String
+  password String
+  role Role
+  status Status
+  user User?
+  @@unique([username, email])
+  @@index(fields: [id, username, email], name: "account_index")
+  @@map("accounts")
+}
+
+model User {
+  id String @id @default(uuid())
+  firstName String @map("first_name")
+  lastName String @map("last_name")
+  account Account @relation(fields: [accountId], references: [id])
+  accountId String
+  @@map("users")
+}

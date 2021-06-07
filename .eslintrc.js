@@ -54,6 +54,7 @@ module.exports = {
         'class-methods-use-this': [0],
         'unicorn/no-useless-undefined': 'off',
         'unicorn/prefer-node-protocol': 'off',
+        'unicorn/prefer-module': 'off',
         // 'import/no-cycle': 'off',
         'react/jsx-props-no-spreading': 'off',
         // 'react-hooks/rules-of-hooks': 'error',
