@@ -4,10 +4,11 @@
   "description": "Compact boilerplate for Next.js, prisma2, type-graphql, graphql-codegen and urql",
   "main": "index.js",
   "scripts": {
-    "test": "test",
-    "dev": "next",
-    "build": "next build",
-    "start": "next start"
+    "test": "jest",
+    "dev": "nodemon",
+    "clean": "rimraf .next && rimraf dist",
+    "build": "yarn clean && next build && tsc --project tsconfig.server.json",
+    "start": "cross-env NODE_ENV=production node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -27,15 +28,24 @@
     "urql"
   ],
   "dependencies": {
+    "@koa/cors": "^3.1.0",
+    "@koa/router": "^10.0.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^10.0.0",
+    "koa": "^2.13.1",
     "next": "^10.2.3",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "tracer": "^1.1.4"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/plugin-proposal-decorators": "^7.14.2",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
+    "@types/dotenv": "^8.2.0",
+    "@types/koa": "^2.13.3",
+    "@types/koa__router": "^8.0.4",
     "@types/node": "^15.12.1",
     "@types/react": "^17.0.9",
     "@types/react-dom": "^17.0.6",
@@ -58,8 +68,12 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-unicorn": "^33.0.1",
     "husky": "^6.0.0",
+    "jest": "^27.0.4",
     "lint-staged": "^11.0.0",
+    "nodemon": "^2.0.7",
     "prettier": "^2.3.1",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.0.0",
     "typescript": "^4.3.2"
   }
 }
