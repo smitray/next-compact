@@ -1,2 +1,3 @@
-# next-compact
-A perfect Next.js boilerplate for all different requirement
+<h1 align="center">Next Compact</h1>
+
+
