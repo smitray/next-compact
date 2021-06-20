@@ -27,13 +27,16 @@
     "graphql-codegen",
     "urql"
   ],
+  "engines": {
+    "node": "14.x.x"
+  },
   "dependencies": {
     "@koa/cors": "^3.1.0",
     "@koa/router": "^10.0.0",
     "cross-env": "^7.0.3",
     "dotenv": "^10.0.0",
     "koa": "^2.13.1",
-    "next": "^10.2.3",
+    "next": "^11.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "tracer": "^1.1.4"
@@ -43,7 +46,6 @@
     "@babel/plugin-proposal-decorators": "^7.14.2",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
-    "@types/dotenv": "^8.2.0",
     "@types/koa": "^2.13.3",
     "@types/koa__router": "^8.0.4",
     "@types/node": "^15.12.1",
