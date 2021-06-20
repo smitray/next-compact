@@ -28,10 +28,13 @@
     "graphql-codegen",
     "urql"
   ],
+  "engines": {
+    "node": "14.x.x"
+  },
   "dependencies": {
     "@koa/cors": "^3.1.0",
     "@koa/router": "^10.0.0",
-    "@prisma/client": "2.23",
+    "@prisma/client": "^2.25.0",
     "apollo-server-koa": "^2.25.0",
     "class-validator": "^0.13.1",
     "cross-env": "^7.0.3",
@@ -40,7 +43,7 @@
     "graphql-fields": "^2.0.3",
     "graphql-scalars": "^1.9.3",
     "koa": "^2.13.1",
-    "next": "^10.2.3",
+    "next": "^11.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "reflect-metadata": "^0.1.13",
@@ -83,7 +86,7 @@
     "lint-staged": "^11.0.0",
     "nodemon": "^2.0.7",
     "prettier": "^2.3.1",
-    "prisma": "2.23",
+    "prisma": "^2.25.0",
     "rimraf": "^3.0.2",
     "ts-node": "^10.0.0",
     "typegraphql-prisma": "^0.14.3",
