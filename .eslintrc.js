@@ -41,15 +41,14 @@ module.exports = {
       extends: [
         'plugin:react/recommended',
         'airbnb-typescript',
+        'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
         'plugin:jest/recommended',
         'plugin:import/recommended',
         'plugin:promise/recommended',
         'plugin:unicorn/recommended',
         'plugin:jsx-a11y/recommended',
-        'prettier/@typescript-eslint',
         'prettier',
-        'prettier/react',
       ],
       rules: {
         'prettier/prettier': 'error',
